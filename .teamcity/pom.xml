@@ -51,7 +51,7 @@
 
   <!-- Build Configuration -->
   <build>
-    <sourceDirectory>${basedir}/src/main/kotlin</sourceDirectory>
+    <sourceDirectory>${basedir}</sourceDirectory>
     <plugins>
       <!-- Kotlin Compiler Plugin -->
       <plugin>
