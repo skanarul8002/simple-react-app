@@ -1,29 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  
+<?xml version="1.0"?>
+<project>
   <modelVersion>4.0.0</modelVersion>
   <name>SimpleReactApp Config DSL Script</name>
   <groupId>SimpleReactApp</groupId>
   <artifactId>SimpleReactApp_dsl</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <!-- Parent for TeamCity Kotlin DSL -->
   <parent>
     <groupId>org.jetbrains.teamcity</groupId>
     <artifactId>configs-dsl-kotlin-parent</artifactId>
-    <version>2024.1</version>
+    <version>1.0-SNAPSHOT</version>
   </parent>
 
-  <!-- Project Properties -->
-  <properties>
-    <kotlin.version>1.9.22</kotlin.version>
-    <teamcity.dsl.version>2024.1</teamcity.dsl.version>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
-  </properties>
-
-  <!-- Repositories for Dependencies -->
   <repositories>
     <repository>
       <id>jetbrains-all</id>
@@ -41,7 +29,6 @@
     </repository>
   </repositories>
 
-  <!-- Plugin Repositories -->
   <pluginRepositories>
     <pluginRepository>
       <id>JetBrains</id>
@@ -49,40 +36,32 @@
     </pluginRepository>
   </pluginRepositories>
 
-  <!-- Build Configuration -->
   <build>
     <sourceDirectory>${basedir}</sourceDirectory>
     <plugins>
-      <!-- Kotlin Compiler Plugin -->
       <plugin>
-        <groupId>org.jetbrains.kotlin</groupId>
         <artifactId>kotlin-maven-plugin</artifactId>
+        <groupId>org.jetbrains.kotlin</groupId>
         <version>${kotlin.version}</version>
-        <configuration>
-          <jvmTarget>17</jvmTarget>
-          <sourceDirs>
-            <source>${basedir}/src/main/kotlin</source>
-          </sourceDirs>
-        </configuration>
+
+        <configuration/>
         <executions>
           <execution>
             <id>compile</id>
-            <phase>compile</phase>
+            <phase>process-sources</phase>
             <goals>
               <goal>compile</goal>
             </goals>
           </execution>
           <execution>
             <id>test-compile</id>
-            <phase>test-compile</phase>
+            <phase>process-test-sources</phase>
             <goals>
               <goal>test-compile</goal>
             </goals>
           </execution>
         </executions>
       </plugin>
-
-      <!-- TeamCity Config DSL Plugin -->
       <plugin>
         <groupId>org.jetbrains.teamcity</groupId>
         <artifactId>teamcity-configs-maven-plugin</artifactId>
@@ -91,56 +70,30 @@
           <format>kotlin</format>
           <dstDir>target/generated-configs</dstDir>
         </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>generate</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <!-- Maven Compiler Plugin -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.11.0</version>
-        <configuration>
-          <source>${maven.compiler.source}</source>
-          <target>${maven.compiler.target}</target>
-        </configuration>
       </plugin>
     </plugins>
   </build>
 
-  <!-- Project Dependencies -->
   <dependencies>
-    <!-- TeamCity DSL Core -->
     <dependency>
       <groupId>org.jetbrains.teamcity</groupId>
       <artifactId>configs-dsl-kotlin-latest</artifactId>
       <version>${teamcity.dsl.version}</version>
       <scope>compile</scope>
     </dependency>
-
-    <!-- TeamCity DSL Plugins -->
     <dependency>
       <groupId>org.jetbrains.teamcity</groupId>
       <artifactId>configs-dsl-kotlin-plugins-latest</artifactId>
-      <version>${teamcity.dsl.version}</version>
+      <version>1.0-SNAPSHOT</version>
       <type>pom</type>
       <scope>compile</scope>
     </dependency>
-
-    <!-- Kotlin Standard Library -->
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-stdlib-jdk8</artifactId>
       <version>${kotlin.version}</version>
       <scope>compile</scope>
     </dependency>
-
-    <!-- Kotlin Script Runtime -->
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-script-runtime</artifactId>
@@ -148,5 +101,4 @@
       <scope>compile</scope>
     </dependency>
   </dependencies>
-
 </project>
