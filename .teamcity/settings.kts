@@ -5,7 +5,6 @@ import jetbrains.buildServer.configs.kotlin.triggers.vcs
 version = "2024.12"
 
 project {
-
     buildType(Build)
 }
 
@@ -16,25 +15,23 @@ object Build : BuildType({
         root(DslContext.settingsRoot)
     }
 
-steps{
-    script{
-        name = "Installing npm packages"
-        scriptContent= """ npm install """
+    steps {
+        script {
+            name = "Installing npm packages"
+            scriptContent = "npm install"
+        }
+
+        script {
+            name = "Run tests"
+            scriptContent = "npm run verify"
+        }
     }
 
-    script{
-        name = "Run tests"
-        scriptContent = """ npm run verify """
-    }
-    
-}
     triggers {
-        vcs {
-        }
+        vcs { }
     }
 
     features {
-        perfmon {
-        }
+        perfmon { }
     }
 })
